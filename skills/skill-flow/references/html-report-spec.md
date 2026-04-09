@@ -14,7 +14,7 @@ Write the complete analysis results to `skill-flow-report.html` in the system te
 - Load Mermaid JS from CDN: `https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js`
 - Dark theme, modern dashboard style
 - HTML must be valid and directly openable in a browser as a complete file
-- Match user's language: report in the same language the user uses. All descriptions and report content should match the user's language.
+- **Language rule (MUST follow)**: The entire report — including all section headings, table headers, descriptions, labels, suggestions, flowchart node labels, and any visible text — MUST be generated in the same language the user uses. The examples in this spec are written in English for clarity only; always translate them to the user's language when generating the report.
 
 ## Page Structure (top to bottom)
 
@@ -33,7 +33,7 @@ Generate an interaction flowchart in **Mermaid flowchart TD** format.
 
 **Node design:**
 
-- All node labels use **English**
+- Node labels use the **user's language** (same language rule as the rest of the report)
 - Node IDs use short English identifiers (n0, n1, n2...)
 - No more than 25 nodes
 
