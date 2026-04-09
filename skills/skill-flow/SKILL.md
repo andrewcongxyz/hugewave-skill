@@ -228,6 +228,8 @@ Output a concise analysis summary in the terminal, formatted as follows:
 
 Read the complete HTML report specification from `${CLAUDE_SKILL_DIR}/references/html-report-spec.md`.
 
+**⚠️ Write scope restriction**: This Skill ONLY writes to the system temp directory. Do NOT write files to any other location (such as the user's project directory or home directory). The only file this Skill creates is the report HTML in the temp directory.
+
 The report is a single-file dark-themed HTML dashboard written to the system temp directory (`/tmp/skill-flow-report.html` on macOS/Linux). It includes these sections in order:
 
 1. **Header** — Skill name, platform badge, total score, grade badge, dimension mini bars
@@ -252,7 +254,7 @@ Handle the following error scenarios gracefully:
 - **URL fetch failure**: If a remote URL returns an error (404, timeout, etc.), report the HTTP status and suggest the user check the URL or try downloading the file locally first
 - **Empty file**: If the file exists but is empty, inform the user rather than proceeding with analysis
 - **Reference file missing**: If `${CLAUDE_SKILL_DIR}/references/` files cannot be loaded, fall back to using the scoring/report knowledge from your training rather than failing the analysis
-- **HTML write failure**: If the report cannot be written to the temp directory, try the current working directory as a fallback and inform the user of the alternative path
+- **HTML write failure**: If the report cannot be written to the temp directory, try the current working directory as a fallback and inform the user of the alternative path. Never write to other arbitrary locations.
 - **Browser open failure**: If the `open`/`xdg-open` command fails, display the file path so the user can open it manually
 
 ---
