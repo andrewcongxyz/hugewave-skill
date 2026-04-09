@@ -101,7 +101,7 @@ Assess the Skill's documentation quality:
 | Missing `description` field                                                        | -5        | All (standard required)                         |
 | `description` too short (less than 10 words) or too long (over 1024 characters)    | -3        | All                                             |
 | `name` format non-compliant (not lowercase, contains illegal characters, too long) | -3        | All                                             |
-| Missing `argument-hint` (when Skill requires parameters)                           | -3        | Claude Code                                     |
+| Missing `argument-hint` (when Skill requires parameters)                           | -3        | All                                             |
 | Missing `license` field (recommended)                                              | -2        | Copilot / Codex / Gemini / OpenCode / Universal |
 | Body missing overall functionality description                                     | -2        | All                                             |
 | Missing output format description                                                  | -2        | All                                             |

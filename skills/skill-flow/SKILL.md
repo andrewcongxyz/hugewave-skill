@@ -3,15 +3,6 @@ name: skill-flow
 description: Analyze the execution flow, tool interactions, and quality scoring of Agent Skill files. Supports Claude Code, GitHub Copilot, OpenAI Codex, Gemini CLI, OpenCode, and agentskills.io universal formats. Supports local file paths, directories, or remote URLs. Generates a visual HTML report and opens it in the browser upon completion
 license: MIT
 argument-hint: "<file path, directory, or URL> (optional — auto-discovers Skill files if omitted)"
-allowed-tools:
-  - Read
-  - Write
-  - Glob
-  - Grep
-  - WebFetch
-  - Bash(uname -s)
-  - Bash(open *)
-  - Bash(xdg-open *)
 ---
 
 # Skill Flow — Agent Skill Interaction Analyzer
@@ -63,7 +54,7 @@ Before parsing the Skill structure, first automatically identify the platform ty
 5. File path contains `.gemini/skills/` or `~/.gemini/skills/` → **Gemini CLI**
 6. File path contains `.opencode/skills/` or `~/.config/opencode/skills/` → **OpenCode**
 7. File path contains `.agents/skills/` or `~/.agents/skills/` → **agentskills.io Universal**
-8. Frontmatter contains Claude Code proprietary fields (`context`, `agent`, `model`, `effort`, `hooks`, `disable-model-invocation`, `user-invocable`, `argument-hint`, `paths`, `shell`) → **Claude Code**
+8. Frontmatter contains Claude Code proprietary fields (`context`, `agent`, `model`, `effort`, `hooks`, `disable-model-invocation`, `user-invocable`, `paths`, `shell`) → **Claude Code**
 9. Frontmatter contains only standard fields (`name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`) → **agentskills.io Universal** (possibly compatible with multiple platforms)
 10. Body contains Claude tool names (Read, Write, Edit, Glob, Grep, WebFetch, Agent, NotebookEdit, AskUserQuestion, TodoRead, TodoWrite) → **Claude Code**
 11. Body contains `$ARGUMENTS` / `${CLAUDE_SKILL_DIR}` / `${CLAUDE_SESSION_ID}` → **Claude Code**
@@ -93,6 +84,7 @@ Parse the corresponding configuration fields based on the identified platform:
 | `compatibility` | ❌       | Environment requirements (target products, system dependencies, etc.) | 🌐 Standard |
 | `metadata`      | ❌       | Custom key-value pairs                                                | 🌐 Standard |
 | `allowed-tools` | ❌       | Pre-authorized tool list (experimental)                               | 🌐 Standard |
+| `argument-hint` | ❌       | Argument autocomplete hint for invoking the Skill                     | 🌐 Standard |
 
 **Claude Code Extension Fields:**
 
@@ -105,7 +97,6 @@ Parse the corresponding configuration fields based on the identified platform:
 | `paths`                    | Activation path glob patterns                 | 🟣 Claude |
 | `shell`                    | Custom shell (bash/powershell)                | 🟣 Claude |
 | `hooks`                    | Lifecycle hooks                               | 🟣 Claude |
-| `argument-hint`            | Argument hint                                 | 🟣 Claude |
 | `user-invocable`           | Whether user can directly invoke              | 🟣 Claude |
 | `disable-model-invocation` | Whether to disable automatic model invocation | 🟣 Claude |
 
